@@ -1,5 +1,5 @@
 const React = require('react');
 const ReactDom = require('react-dom');
-const Mine = require('./Mine');
+const WordRelay = require('./WordRelay');
 
-ReactDom.render(<Mine/>, document.querySelector('#root'));
+ReactDom.render(<WordRelay/>, document.querySelector('#root'));
