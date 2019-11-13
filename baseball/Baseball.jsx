@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Try from './Try';
 
 const getRandomNum = () => {
@@ -20,7 +20,7 @@ const getRandomNum = () => {
   return answer;
 };
 
-class Baseball extends Component {
+class Baseball extends PureComponent {
   state = {
     answer: '', // 정답
     result: '', // 결과
@@ -42,6 +42,8 @@ class Baseball extends Component {
   };
 
   onClickButton = () => {
+    if(this.state.value === '') return;
+    
     const arrAnswer = this.state.answer.split('');
     const arrValue = this.state.value.split('');
 
