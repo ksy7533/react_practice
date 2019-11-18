@@ -1,61 +1,61 @@
-import React, { PureComponent } from 'react';
-import Try from './Try';
+import React, { PureComponent } from "react";
+import Try from "./Try";
 
 const getRandomNum = () => {
   let arr = [];
-  let answer = '';
-  for(let i = 0; i < 10; i++) {
+  let answer = "";
+  for (let i = 0; i < 10; i++) {
     arr.push(i);
   }
 
   let index;
-  for(let i = 0; i < 4; i++) {
+  for (let i = 0; i < 4; i++) {
     index = Math.floor(Math.random() * (10 - i));
     answer += arr[index];
     arr.splice(index, 1);
   }
 
-  console.log(answer)
+  console.log(answer);
 
   return answer;
 };
 
 class Baseball extends PureComponent {
   state = {
-    answer: '', // 정답
-    result: '', // 결과
+    answer: "", // 정답
+    result: "", // 결과
     list: [],
-    value: '', // 인풋 밸류
+    value: "" // 인풋 밸류
   };
 
   setAnswer = () => {
     this.setState({
-      answer: getRandomNum(),
+      answer: getRandomNum()
     });
   };
 
-  onChangeInput = (e) => {
+  onChangeInput = e => {
     const value = e.currentTarget.value;
     this.setState({
-      value: value,
+      value: value
     });
   };
 
   onClickButton = () => {
-    if(this.state.value === '') return;
-    
-    const arrAnswer = this.state.answer.split('');
-    const arrValue = this.state.value.split('');
+    if (this.state.value === "") return;
+
+    const arrAnswer = this.state.answer.split("");
+    const arrValue = this.state.value.split("");
 
     let strike = 0;
     let ball = 0;
 
-    for(let aIndex = 0; aIndex < arrAnswer.length; aIndex++) {
-      for(let vIndex = 0; vIndex < arrValue.length; vIndex++) {
-        if(arrAnswer[aIndex] === arrValue[vIndex]) {
-          if(aIndex === vIndex) {
+    for (let aIndex = 0; aIndex < arrAnswer.length; aIndex++) {
+      for (let vIndex = 0; vIndex < arrValue.length; vIndex++) {
+        if (arrAnswer[aIndex] === arrValue[vIndex]) {
+          if (aIndex === vIndex) {
             strike++;
-          }else {
+          } else {
             ball++;
           }
           break;
@@ -63,62 +63,65 @@ class Baseball extends PureComponent {
       }
     }
 
-    if(strike === 4) {
+    if (strike === 4) {
       this.setState({
-        result: '홈런입니다!',
-        value: '',
+        result: "홈런입니다!",
+        value: "",
         list: [],
-        answer: getRandomNum(),
+        answer: getRandomNum()
       });
 
       return;
     }
 
-    if(this.state.list.length === 10) {
+    if (this.state.list.length === 10) {
       this.setState({
-        result: '실패!',
-        value: '',
+        result: "실패!",
+        value: "",
         list: [],
-        answer: getRandomNum(),
+        answer: getRandomNum()
       });
 
       return;
     }
 
     this.setState({
-      list: [...this.state.list, { try: this.state.value, result: `${strike}스트라이크 ${ball}볼` }],
-      value: '',
+      list: [
+        ...this.state.list,
+        { try: this.state.value, result: `${strike}스트라이크 ${ball}볼` }
+      ],
+      value: ""
     });
   };
 
   input;
 
-  onRefInput = (c) => {
+  onRefInput = c => {
     this.input = c;
   };
 
   componentWillMount = () => {
     this.setAnswer();
-  }
+  };
 
   render() {
     return (
       <>
         <p>{this.state.list.length}회 도전</p>
-        <input ref={this.onRefInput} onChange={this.onChangeInput} value={this.state.value}></input>
+        <input
+          ref={this.onRefInput}
+          onChange={this.onChangeInput}
+          value={this.state.value}
+        ></input>
         <button onClick={this.onClickButton}>입력</button>
         <p>{this.state.result}</p>
         <ul>
-          {
-            this.state.list.map((item, index) => {
-              return (
-                <Try key={index} tryInfo={item}></Try>
-              )
-            })
-          }
+          {this.state.list.map((item, index) => {
+            return <Try key={index} tryInfo={item}></Try>;
+          })}
         </ul>
       </>
-    )
+    );
   }
 }
 
