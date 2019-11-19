@@ -18,6 +18,12 @@
       clear: both;
     }
 
+    &.checked {
+      .text {
+        text-decoration: line-through;
+      }
+    }
+
     svg {
       float: left;
     }
