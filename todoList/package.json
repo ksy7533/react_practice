@@ -19,7 +19,8 @@
   "homepage": "https://github.com/ksy7533/react_practice#readme",
   "dependencies": {
     "react": "^16.11.0",
-    "react-dom": "^16.11.0"
+    "react-dom": "^16.11.0",
+    "react-virtualized": "^9.21.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
