@@ -12,7 +12,8 @@ module.exports = {
   },
 
   entry: {
-    app: ["./client"]
+    // app: ["./client"]
+    app: ["@babel/polyfill", "./client"]
   },
 
   devServer: {
