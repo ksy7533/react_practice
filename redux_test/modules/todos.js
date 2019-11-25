@@ -9,7 +9,7 @@ export const changeInput = input => ({
 });
 
 let id = 3;
-export const insert = id => ({
+export const insert = text => ({
   type: INSERT,
   todo: {
     id: id++,
@@ -49,7 +49,7 @@ function todos(state = initialState, action) {
     case CHANGE_INPUT:
       return {
         ...state,
-        input: actions.input
+        input: action.input
       };
       break;
     case INSERT:
